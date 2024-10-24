@@ -8,7 +8,6 @@ jobs:
     name: Test plugin installation
     runs-on: ubuntu-latest
     steps:
-
       - name: Install helm
         run: |
           helm_version="3.15.2"
@@ -18,7 +17,7 @@ jobs:
           curl -sSL https://get.helm.sh/${tar_filename} -O
           curl -sSL https://get.helm.sh/${checksum_filename} -O
           cat ${checksum_filename} | sha256sum -c
-          
+
           tar xzf ${tar_filename}
           sudo mv linux-amd64/helm /usr/local/bin/helm
           rm -rf linux-amd64 ${tar_filename} ${checksum_filename}
@@ -33,4 +32,4 @@ jobs:
           fi
 
           echo "Check installation of version ${version}"
-          helm plugin install https://github.com/hypnoglow/helm-s3.git --version ${version}
+          helm plugin install https://github.com/chasinglogic/helm-s3.git --version ${version}

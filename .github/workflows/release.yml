@@ -3,7 +3,7 @@ name: release
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
 
 jobs:
   release:
@@ -12,7 +12,6 @@ jobs:
     permissions:
       contents: write
     steps:
-
       - name: Checkout
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
@@ -22,7 +21,7 @@ jobs:
         uses: actions/setup-go@0a12ed9d6a96ab950c8f026ed9f722fe0da7ef32 # v5.0.2
         with:
           cache: true
-          go-version-file: 'go.mod'
+          go-version-file: "go.mod"
 
       - name: Download dependencies
         run: |
@@ -38,13 +37,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # Useful if you want to use not the latest tag for changelog.
           GORELEASER_PREVIOUS_TAG: ""
-
-  docker-images:
-    name: Build Docker images
-    uses: ./.github/workflows/reusable-docker-images.yml
-    secrets:
-      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
 
   test-install:
     name: Test plugin installation
